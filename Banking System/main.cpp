@@ -12,7 +12,8 @@ void UpdateCounter(int& counter) { counter++; }
 
 int main() {
 
-	UserAccount* arr[50];
+	const int MAX = 50;
+	UserAccount* arr[MAX] = { nullptr };
 
 	int counter = 0;
 	int choice;
@@ -31,14 +32,18 @@ int main() {
 
 		cin >> choice;
 
+		if (choice == 7)
+			break;
+
 		switch (choice) {
 
 		case 1:
 		{
+			if (counter >= MAX) { cout << "Full!\n"; break; }
+
 			string n;
 			long int id;
 			double b;
-
 
 			cout << "The User Name : \n";
 			cin >> n;
@@ -57,13 +62,12 @@ int main() {
 
 		case 2:
 		{
+			if (counter >= MAX) { cout << "Full!\n"; break; }
 
 			string n;
 			long int id;
 			double b, DR;
 			bool isF;
-
-
 
 			cout << "The User Name : \n";
 			cin >> n;
@@ -162,8 +166,7 @@ int main() {
 			break;
 		}
 
-		case 7:
-		{ exit(0); }
+		
 
 		defalut:
 			cout<<" Choice is wrong . Try again please \n";
@@ -171,6 +174,9 @@ int main() {
 		}
 		}
 		
-	
+		for (int i = 0; i < counter; i++) {
+			delete arr[i];
+			arr[i] = nullptr;
+		}
 	return 0;
 }
